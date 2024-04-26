@@ -44,6 +44,7 @@ PYTHON_TA_PATH = "/test_agent/python/testagent.py"
 JAVA_TA_PATH = (
     "/test_agent/java/target/tck-test-agent-java-jar-with-dependencies.jar"
 )
+CPP_TA_PATH = "/test_agent/cpp/target/bin/testagent-app"
 DISPATCHER_PATH = "/dispatcher/dispatcher.py"
 
 
@@ -63,7 +64,7 @@ def create_command(filepath_from_root_repo: str) -> List[str]:
         ):
             command.append("python3")
     else:
-        raise Exception("only accept .jar and .py files")
+        pass
     command.append(
         os.path.abspath(
             os.path.dirname(os.getcwd()) + "/" + filepath_from_root_repo
@@ -125,6 +126,10 @@ def before_all(context):
     process: subprocess.Popen = create_subprocess(command)
     context.java_ta_process = process
 
+    command = create_command(CPP_TA_PATH)
+    process: subprocess.Popen = create_subprocess(command)
+    context.cpp_ta_process = process
+    
     context.logger.info("Created All Test Agents...")
 
 
@@ -135,6 +140,7 @@ def after_all(context: Context):
 
     context.tm.close_test_agent("python")
     context.tm.close_test_agent("java")
+    context.tm.close_test_agent("cpp")
     context.tm.close()
     context.dispatcher.close()
 
@@ -143,5 +149,6 @@ def after_all(context: Context):
     try:
         context.java_ta_process.terminate()
         context.python_ta_process.terminate()
+        context.cpp_ta_process.terminate()
     except Exception as e:
         context.logger.error(e)

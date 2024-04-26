@@ -64,5 +64,11 @@ Feature: Testing Publish and Subscribe Functionality
       | uE1    | uE2    |
       | python | python |
       | java   | java   |
+      | cpp    | cpp    |
       | java   | python |
       | python | java   |
+      | cpp    | python |
+      | python | cpp    |
+      | java   | cpp    |
+      | cpp    | java   |
+      

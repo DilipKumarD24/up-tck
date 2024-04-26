@@ -25,6 +25,8 @@
 # -------------------------------------------------------------------------
 import base64
 import codecs
+import json
+
 from typing import Any, Dict
 from uprotocol.proto.ustatus_pb2 import UCode
 
@@ -367,6 +369,8 @@ def send_micro_serialized_command(
 def access_nested_dict(dictionary, keys):
     keys = keys.split(".")
     value = dictionary
+    if isinstance(value,str):
+        value = json.loads(value)
     for key in keys:
         value = value[key]
     return value
