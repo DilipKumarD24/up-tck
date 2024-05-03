@@ -44,7 +44,7 @@ PYTHON_TA_PATH = "/test_agent/python/testagent.py"
 JAVA_TA_PATH = (
     "/test_agent/java/target/tck-test-agent-java-jar-with-dependencies.jar"
 )
-CPP_TA_PATH = "/test_agent/cpp/target/bin/testagent-app"
+CPP_TA_PATH = "/test_agent/cpp/target/bin/test_agent_cpp"
 DISPATCHER_PATH = "/dispatcher/dispatcher.py"
 
 
